@@ -30,3 +30,9 @@ An implementation of the FAst DEconvolution (FADE) Algorithm
   smoothed_traces: smoothed calcium traces
    
   ds: relative changes in the spikes  
+
+# Suggested Preprocessing
+  
+  Subtract the minimum of each trace
+  
+  normalize each trace by its maximum, this will allow the choice of regularization to be more consistent
