@@ -21,7 +21,7 @@ An implementation of the FAst DEconvolution (FADE) Algorithm
   
   num_iters: maximum number of iterations, default: num_iters = 200
   
- #Output: 
+ # Output: 
  
   A structure containing the following added fields
  
