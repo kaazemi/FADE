@@ -7,8 +7,9 @@ T = size(sys.y,2);
     if ~isfield(sys,'lambda'); sys.lambda = 0;
     disp('Warning: Lambda set to 0, solving the ML problem');       end
     sys.lambda = sys.lambda*sqrt(log(T)/T)*diag(sys.noise);
-    if ~isfield(sys,'pen_norm'); sys.pen_norm = 'l2_sq';            end
-    
+%     if ~isfield(sys,'pen_norm'); sys.pen_norm = 'l2_sq';            end
+    if ~isfield(sys,'p_norm'); sys.p_norm = 1;            end
+    if ~isfield(sys,'q_norm'); sys.q_norm = 1;            end
     
     sys.baseline = estimate_base(sys.y,sys.noise);
     sys.y = sys.y - sys.baseline;
@@ -29,6 +30,7 @@ T = size(sys.y,2);
         sys.s0 = filter(sys.theta,1,sys.y,[],2); sys.s0(sys.s0<=0) = 1;
 %     sys.s0 = ones(size(sys.y));
     
+    sys.T = size(sys.y,2);
 end
 
 function sigma = estimate_noise(y)

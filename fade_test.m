@@ -11,7 +11,12 @@ sys.y = X+0.1*randn(size(w))+b;
 %%
 % sys.Order = 2;
 sys.lambda = 1000;
-sys.pen_norm = 'l1';
+% sys.pen_norm = 'l1';
+sys.p_norm = 1;
+sys.q_norm = 1;
+message = sprintf('Penalizing ell_%d,%d norm of spikes',sys.p_norm,sys.q_norm);
+disp(message)
+
 tic
 sys_fade = FADE( sys );
 toc
