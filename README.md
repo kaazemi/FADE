@@ -1,7 +1,7 @@
 # FADE
 An implementation of the FAst DEconvolution (FADE) Algorithm
 # Input: 
-  Structure called sys with the following fields:
+  Structure called sys with the following fields:\n
         y: observed calcium traces where the first dimension is the number of ROI's and
         second dimension is time and
         p_norm and q_norm: Penalizes the ell_pq norm of spikes, default: p = q = 1
