@@ -30,10 +30,6 @@ hold on; stem(w(index,:),'marker','none');
 f3 = subplot(3,1,3); stem(sys_fade.spikes(index,:),'marker','none'); title('Recovered Spikes: No post processing done')
 linkaxes([f1 f2 f3],'x')
 %%%%%%%
-% figure(2);
-% plot(sys_fcss.objective(2:end));
 figure;
 plot(100*sys_fade.ds(2:end)); title('Relative Changes in estimated spikes')
 ylabel('Percent'), xlabel('Iteration')
-% sys_fcss.b
-%%%%%%
