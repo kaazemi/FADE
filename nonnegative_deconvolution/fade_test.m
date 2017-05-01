@@ -15,8 +15,8 @@ sys.y = X+0.1*randn(size(w))+b; %Noisy calcium traces
 sys.lambda = 1000; %regularization parameter
 sys.p_norm = 1;    % p norm in ell_pq penalty on spikes
 sys.q_norm = 1;    % q norm in ell_pq penalty on spikes
-message = sprintf('Penalizing ell_%d,%d norm of spikes',sys.p_norm,sys.q_norm);
-disp(message)
+% message = sprintf('Penalizing ell_%d,%d norm of spikes',sys.p_norm,sys.q_norm);
+% disp(message)
 
 tic
 sys_fade = FADE( sys );

@@ -4,12 +4,16 @@ T = size(sys.y,2);
     if ~isfield(sys,'min_iters'); sys.min_iters = 100;              end
     if ~isfield(sys,'num_iters'); sys.num_iters = 200;              end
     if ~isfield(sys,'noise'); sys.noise = estimate_noise(sys.y);    end
-    if ~isfield(sys,'lambda'); sys.lambda = 0;
-    disp('Warning: Lambda set to 0, solving the ML problem');       end
-    sys.lambda = sys.lambda*sqrt(log(T)/T)*diag(sys.noise);
+    if ~isfield(sys,'lambda'); sys.lambda = 0;                      end
 %     if ~isfield(sys,'pen_norm'); sys.pen_norm = 'l2_sq';            end
     if ~isfield(sys,'p_norm'); sys.p_norm = 1;            end
     if ~isfield(sys,'q_norm'); sys.q_norm = 1;            end
+if sys.lambda > 0
+     message = sprintf('Penalizing ell_%0.1f,%0.1f norm of spikes',sys.p_norm,sys.q_norm);
+else message = 'Warning: Lambda set to 0, solving the ML problem';
+end
+    disp(message)
+    sys.lambda = sys.lambda*sqrt(log(T)/T)*diag(sys.noise);
     
     sys.baseline = estimate_base(sys.y,sys.noise);
     sys.y = sys.y - sys.baseline;

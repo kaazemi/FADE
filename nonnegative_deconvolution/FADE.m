@@ -14,8 +14,8 @@ function sys_fade = FADE( sys )
 %        num_iters: maximum number of iterations, default: num_iters = 200
 % Output: A structure containing the following fields
 %        spikes: the deconvolved spikes, post processing methods should be
-%        smoothed_traces: smoothed calcium traces
 %        used on the spikes in most cases
+%        smoothed_traces: smoothed calcium traces
 %        ds: relative changes in the spikes        
 %%        
 sys = default_opts_fade(sys);
@@ -53,6 +53,8 @@ function Pp = calc_penalty(sys,s)
     A2 = repmat(sum(s.^sys.p_norm,2).^(sys.q_norm/sys.p_norm-1),1,sys.T);
     A3 = s.^(sys.p_norm-1);
     Pp = A1*A2.*A3;
+    index = isinf(Pp) | isnan(Pp);
+    Pp(index) = 0;
 end
 
 
