@@ -1,5 +1,5 @@
-# FADE
-An implementation of the FAst DEconvolution (FADE) Algorithm
+# FADE: Nonnegative Deconvoution
+An implementation of the FAst DEconvolution (FADE) Algorithm for Nonnegative Deconvoution
 # Input: 
   Structure called sys with the following fields:
   
