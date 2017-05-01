@@ -19,15 +19,13 @@ function sys_fade = FADE( sys )
 %        ds: relative changes in the spikes        
 %%        
 sys = default_opts_fade(sys);
-[p,T] = size(sys.y);
-
 b = sys.b0;
 s = sys.s0;
 ds = zeros(1,sys.num_iters);
 iter = 1;
 ds(1) = 1;
     while iter < sys.num_iters && ( ds(iter)>0.005 || iter<sys.min_iters)
-        [Lp,Ln] = calc_L(sys,s,b); % positive and negative log-likelihood terms
+        [Lp,Ln] = calc_likelihood_terms(sys,s,b); % positive and negative log-likelihood terms
         Pp = calc_penalty(sys,s); % Penalty terms
         snew = Ln./(Lp+sys.lambda*Pp).*s; % multiplicative updates
         ds(iter+1) = max(abs((sum(s,2)-sum(snew,2))./sum(s,2)));
@@ -43,7 +41,8 @@ sys_fade.theta = sys.theta;
 sys_fade.ds = ds(1:iter-1);
 end
 
-function [Lp,Ln] = calc_L(sys,s,b)
+
+function [Lp,Ln] = calc_likelihood_terms(sys,s,b)
 Ln = 2*fliplr(filter(1,sys.theta,fliplr(sys.y),[],2));
 X = filter(1,sys.theta,s,[],2);
 Lp = 2*fliplr(filter(1,sys.theta,fliplr(X+b),[],2));
